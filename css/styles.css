@@ -66,6 +66,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 16px;
 }
 
+.mdl-keitetsu .mdl-cell--ad {
+  padding: 16px;
+}
+
 .mdl-keitetsu .amazon-banner-1 {
   position: fixed;
   width: 120px;
@@ -75,6 +79,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .mdl-keitetsu .amazon-banner-2 {
   width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.mdl-keitetsu .ad-300x250 {
+  width: 300px;
+  height: 250px;
   display: block;
   margin: 0 auto;
 }
