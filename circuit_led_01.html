@@ -1,0 +1,244 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - フルカラーLEDモジュールの制御">
+    <title>KeitetsuWorks - フルカラーLEDモジュールの制御</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>フルカラーLEDモジュールの制御</h3>
+                <p>
+                  学校のゴミ捨て場で詳細不明なLEDモジュールを拾ってきました．
+                  一辺20mmの正方形でベースはアルミ板，
+                  ドーム状の乳白色樹脂の中に赤，緑，青（以下，RGB）各色のチップLEDが封入されているようです．
+                  とりあえず電圧をかけてみると，写真のように発光しました． 
+                  端子はLED3個分，合計6本ありますが，ショートさせてあり， 
+                  RGB各色のLEDが直列接続されていました． 
+                  結構大きな素子なのに型番やメーカー名の表記がありません．謎です．
+                  今回は，このLEDモジュールをPICマイコンで制御して遊んでみました．
+                </p>
+                <a href="img/circuit_led_01/img01.jpg" data-lightbox="led" data-title="LEDモジュール">
+                  <img src="img/circuit_led_01/img01_thumb.jpg" alt="LEDモジュール" /></a>
+                <p>
+                  ここで紹介する回路図やソースコードは，一般的なフルカラーLEDの制御にも使用できます．
+                  簡単な回路ですが，イルミネーションのようにとてもきれいに発光してくれると思います．
+                </p>
+
+                <h4>回路図と使用部品</h4>
+                <a href="img/circuit_led_01/schematic.png" data-lightbox="led" data-title="回路図">
+                  <img src="img/circuit_led_01/schematic.png" alt="回路図" />
+                </a>
+                <p>
+                  ブレッドボード上で回路を組むことを前提に，必要最小限の部品のみリストアップしました．
+                  基板上に組む場合は，電源回路やソケット，コネクタ類などが必要になると思います．
+                  参考価格は秋月電子通商で購入した場合のものです．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">番号</th>
+                        <th class="mdl-data-table__cell--non-numeric">部品名</th>
+                        <th class="mdl-data-table__cell--non-numeric">型番</th>
+                        <th>数量</th>
+                        <th class="mdl-data-table__cell--non-numeric">参考価格</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">U1</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIC</td>
+                        <td class="mdl-data-table__cell--non-numeric">16F84A-20I/P</td>
+                        <td class="">1</td>
+                        <td class="mdl-data-table__cell--non-numeric">220円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">X1</td>
+                        <td class="mdl-data-table__cell--non-numeric">セラロック</td>
+                        <td class="mdl-data-table__cell--non-numeric">20MHz（コンデンサ内臓）</td>
+                        <td class="">1</td>
+                        <td class="mdl-data-table__cell--non-numeric">30円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">LED1</td>
+                        <td class="mdl-data-table__cell--non-numeric">LEDモジュール</td>
+                        <td class="mdl-data-table__cell--non-numeric">詳細不明（フルカラーLEDで代用可能）</td>
+                        <td class="">1</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R1～3</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">1/4W 330Ω</td>
+                        <td class="">3</td>
+                        <td class="mdl-data-table__cell--non-numeric">1円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">リード線など</td>
+                        <td class="">適量</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  今回は手元にあったPIC 16F84Aを採用しましたが，
+                  新規に用意される場合は16F648Aや16F88の購入をお薦めします．
+                  秋月電子通商の場合は後者の方が安価ですし，
+                  搭載されている機能も充実していて，発展性に富むからです．
+                  しかし，16F84A以外を使用する場合は
+                  下記ソースコードの一部を改変する必要があります．ご注意ください．
+                </p>
+                <p>
+                  拾ってきたLEDモジュールはクリーニングした後，
+                  使いやすいように配線し直しました．カソードコモンになっています．
+                  端子が5本出ていますが，左端から順にN.C.（未接続），R，G，B，カソードです．
+                </p>
+                <a href="img/circuit_led_01/img02.jpg" data-lightbox="led" data-title="LEDモジュール">
+                  <img src="img/circuit_led_01/img02_thumb.jpg" alt="LEDモジュール" />
+                </a>
+                <p>
+                  R1～R3はRGB各色のLEDの電流制限抵抗です．
+                  一般に，LEDは発光色により輝度が異なり，RGB全点灯で白色を再現するためには，
+                  電流制限抵抗の抵抗値を変えることで輝度を調整する必要があります．
+                  しかし，今回使用したLEDモジュールは詳細が不明なうえ，
+                  手元にある抵抗だけでまかなう必要があったため，今回は全て同じ抵抗値としました．
+                </p>
+                <p>
+                  ブレッドボード上に上記回路を再現した様子です．
+                  マイコン周辺部には自作の汎用マイコンボードを用いました．
+                  色々な部品が実装されていますが，今回はほとんど使用していません．
+                </p>
+                <a href="img/circuit_led_01/img03.jpg" data-lightbox="led" data-title="実験回路">
+                  <img src="img/circuit_led_01/img03_thumb.jpg" alt="実験回路" />
+                </a>
+                <p>
+                光を拡散させるため，LEDモジュールにフィルムケースを被せました．
+                </p>
+                <a href="img/circuit_led_01/img04.jpg" data-lightbox="led" data-title="LEDモジュール">
+                  <img src="img/circuit_led_01/img04_thumb.jpg" alt="LEDモジュール" />
+                </a>
+
+                <h4>完成</h4>
+                <p>
+                  動作中の様子を撮影した動画です．
+                </p>
+                <iframe class="youtube-video-player" width="560" height="315" src="https://www.youtube.com/embed/sBK_M_aE4A4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p>
+                  ジオラマの光源に応用すれば，朝焼けや夕焼けを再現して，
+                  交通科学博物館のパノラマ室のように「鉄道の一日」を演出することもできるでしょう．
+                  そのためには，LEDモジュールをもっと用意しなければいけません…．
+                  回路も，トランジスタやFETを用いて大電流を制御できるようにする必要がありそうです．
+                </p>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>

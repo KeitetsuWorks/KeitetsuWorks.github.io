@@ -1,0 +1,303 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - カードリーダのアイコンをカスタマイズ">
+    <title>KeitetsuWorks - カードリーダのアイコンをカスタマイズ</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab is-active" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link is-active" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>カードリーダのアイコンをカスタマイズ</h3>
+                <p>
+                  デジタルカメラや携帯電話に必要不可欠なメモリーカードですが，その種類はとても多く，
+                  PC用のカードリーダが対応するメディアの種類も年々増えています．
+                  カードリーダをPCに接続すると，多くの場合は「リムーバブル ディスク」という名前のドライブが
+                  マイ コンピュータ上に複数表示されます．ドライブ名どころかアイコンも全て同じです．
+                  わかりにくいと感じたこと，間違えてアイコンをクリックしてしまったことはありませんか？
+                  ここではカードリーダのドライブ名とアイコンを変更して，使い易く，見栄えよくする方法を紹介したいと思います．
+                </p>
+                <p>
+                  また，カードリーダによっては，製造元が本ページで紹介する内容と同等の機能を提供するユーティリティソフトウェアを配布している場合があります．事前に確認してみてください．
+                </p>
+                <p>
+                  下記の環境で動作を確認しておりますが，掲載内容については各自の責任のうえでご活用願います．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">OS</th>
+                      <td class="mdl-data-table__cell--non-numeric">
+                        Microsoft Windows XP Professional Service Pack 3<br />
+                        （システム領域はC:\）
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">カードリーダ</th>
+                      <td class="mdl-data-table__cell--non-numeric">Y-E DATA YD-8V06</td>
+                    </tr>
+                  </table>
+                </div>
+                <p>
+                  ここで紹介する方法を適用した後のマイ コンピュータの表示です．
+                </p>
+                <img src="img/reader-icon/reader-icon_01.png" alt="スクリーンキャプチャ" />
+
+                <h4>1. ドライブ文字を変更する</h4>
+                <p>
+                  ドライブ名とアイコンはドライブ文字に関連付けて設定します．
+                  このため，ドライブ文字をわかりやすく整理しておくことをおすすめします．
+                </p>
+                <p>
+                  「コントロールパネル」-「管理ツール」-「コンピュータの管理」-「ディスクの管理」の順に開きます．
+                  ドライブの一覧が表示されるので，カードリーダに該当するドライブを選択して右クリックし，
+                  「ドライブ文字とパスの変更」をクリックします．
+                </p>
+                <img src="img/reader-icon/reader-icon_02.png" alt="スクリーンキャプチャ" />
+                <img src="img/reader-icon/reader-icon_03.png" alt="スクリーンキャプチャ" />
+                <p>
+                  「変更」をクリックすると別ウィンドウが開き，ドライブ文字を変更することができます．
+                  SDカードリーダは「S:」にするなど，ドライブ文字でも判別できるようにしておくと良いかもしれません．
+                  以降では下記のように設定したと仮定します．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">コンパクトフラッシュ，マイクロドライブ</th>
+                      <td class="mdl-data-table__cell--non-numeric">P:</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">スマートメディア，xD-Pictureカード</th>
+                      <td class="mdl-data-table__cell--non-numeric">Q:</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">メモリースティック</th>
+                      <td class="mdl-data-table__cell--non-numeric">R:</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">SDカード，マルチメディアカード</th>
+                      <td class="mdl-data-table__cell--non-numeric">S:</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h4>2. アイコンを選ぶ</h4>
+                <p>
+                Windows XPでは，shell32.dllにコンパクトフラッシュ，スマートメディアおよびSDカードのアイコンが標準で用意されています．
+                今回はこれら3つのアイコンを活用しようと思います．各アイコンのパスは下記の通りです．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">コンパクトフラッシュ</th>
+                      <td class="mdl-data-table__cell--non-numeric">%SystemRoot%\\system32\\SHELL32.DLL,189</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">スマートメディア</th>
+                      <td class="mdl-data-table__cell--non-numeric">%SystemRoot%\\system32\\SHELL32.DLL,194</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">SDカード</th>
+                      <td class="mdl-data-table__cell--non-numeric">%SystemRoot%\\system32\\SHELL32.DLL,193</td>
+                    </tr>
+                  </table>
+                </div>
+                <p>
+                  shell32.dllにはメモリースティックのアイコンがありません．
+                  しかし，SONY VAIOや，メモリースティックを使用するソフトウェアをインストールしている環境下には
+                  snymsico.dllというファイルが存在する可能性があります．
+                  このファイルには，メモリースティックのアイコンが用意されています．私の場合は偶然このファイルが存在しました．
+                  （予想ですが，BeatJamをインストールしているからかもしれません．間違っていたらごめんなさい．）
+                  検索すると，それらしきファイルを配布しているWebページも出てきます．アイコンのパスは以下の通りです．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">メモリースティック（ブルー）</th>
+                      <td class="mdl-data-table__cell--non-numeric">%SystemRoot%\\snymsico.dll,0</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">メモリースティック（グレー）</th>
+                      <td class="mdl-data-table__cell--non-numeric">%SystemRoot%\\snymsico.dll,1</td>
+                    </tr>
+                  </table>
+                </div>
+                <p>
+                  インターネット上から好みのアイコンを探したり，自作しても良いと思います．
+                  とりあえず，必要な種類だけアイコンを用意しましょう．
+                </p>
+
+                <h4>3. レジストリファイル（登録エントリ）を作成する</h4>
+                <p>
+                  レジストリファイルを作成します．
+                  下記の例をテキストエディタ（サクラエディタ，メモ帳など）上にコピーし，編集してください．
+                  <font color="#008000">緑色がドライブ文字</font>，<font color="#ff0000">赤色がアイコンのパス</font>，
+                  <font color="#ff6600">橙色がドライブ名</font>です．
+                  編集が終わったら，拡張子を.regにして任意の場所に保存します．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <td class="mdl-data-table__cell--non-numeric">
+REGEDIT4<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons]<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">S</font>]<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">S</font>\DefaultIcon]<br />
+@="<font color="#ff0000">%SystemRoot%\\system32\\SHELL32.DLL,193</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">S</font>\DefaultLabel]<br />
+@="<font color="#ff6600">SDカード</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">Q</font>]<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">Q</font>\DefaultIcon]<br />
+@="<font color="#ff0000">%SystemRoot%\\system32\\SHELL32.DLL,194</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">Q</font>\DefaultLabel]<br />
+@="<font color="#ff6600">xD-Pictureカード</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">P</font>]<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">P</font>\DefaultIcon]<br />
+@="<font color="#ff0000">%SystemRoot%\\system32\\SHELL32.DLL,189</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">P</font>\DefaultLabel]<br />
+@="<font color="#ff6600">CompactFlash</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">R</font>]<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">R</font>\DefaultIcon]<br />
+@="<font color="#ff0000">%SystemRoot%\\snymsico.dll,0</font>"<br />
+<br />
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\DriveIcons\<font color="#008000">R</font>\DefaultLabel]<br />
+@="<font color="#ff6600">MemoryStick</font>"
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h4>4. レジストリ変更の実行</h4>
+                <p>
+                  [3]で作成したレジストリファイルをダブルクリックします．
+                  「情報をレジストリに追加しますか?」と聞いてくるので「はい」をクリックします．
+                  「情報が、レジストリに正しく入力されました。」と出れば成功，作業は終了です．
+                  マイ コンピュータを開き，ドライブ名やアイコンが正しく変更されているか確認してください．
+                  変更がすぐに反映されない場合があります．
+                  以前と変化がない場合は，キーボードのF5キーを押して最新の情報に更新してみてください．
+                  F5キーを押しても変化がない場合，思ったように設定できていない場合はレジストリファイルの記述ミスが考えられます．
+                  再度確認してみてください．
+                </p>
+                <img src="img/reader-icon/reader-icon_04.png" alt="スクリーンキャプチャ" />
+                <img src="img/reader-icon/reader-icon_05.png" alt="スクリーンキャプチャ" />
+                <img src="img/reader-icon/reader-icon_06.png" alt="スクリーンキャプチャ" />
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>

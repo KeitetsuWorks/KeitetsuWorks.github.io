@@ -1,0 +1,572 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - KATOのパワーパックをPICマイコンによるPWM制御方式に改造する">
+    <title>KeitetsuWorks - KATOのパワーパックをPICマイコンによるPWM制御方式に改造する</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>KATOのパワーパックをPICマイコンによるPWM制御方式に改造する</h3>
+                <h4>はじめに</h4>
+                <p>
+                  ACアダプタが欠品になってしまっているKATOの<a href="http://www.katomodels.com/product/nmi/power_pack_standard_s.shtml" target="_blank">パワーパック スタンダードS</a>を入手したので，PWM制御方式に改造してみました．
+                  PWM制御方式を採用することにより，鉄道模型が停車中も室内灯，ヘッドライトおよびテールライトの点灯状態を維持可能な，常点灯機能を実現可能です．
+                  また，一般的なトランジスタを用いたパワーパックよりも，安定した低速運転が可能になります．
+                </p>
+
+                <h4>KATO 22-012 パワーパック スタンダードS</h4>
+                <p>
+                  パワーパック スタンダードSは，Amazon.co.jpで3,200円程度です．
+                </p>
+
+                <iframe class="amazon-ads" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=keitetsu-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B001V7YBC4&linkId=a8ed8dd91cbb08abd4f2ffb4d4cc8102"></iframe>
+
+                <p>
+                  まず，パワーパックを分解してみます．
+                  底面の4つのゴム足を剥がす（両面テープで接着されています）とネジが姿を現すので，これを外してパワーパックを開けます．
+                </p>
+
+                <a href="https://lh6.googleusercontent.com/-pO7Zbb0ThGk/UvmVhVX3buI/AAAAAAAACE8/gLePpDwMK0Y/s800/DSC_0385.JPG" data-lightbox="mokei_pwm_ctrl" data-title="パワーパック スタンダードSの分解">
+                  <img src="https://lh6.googleusercontent.com/-pO7Zbb0ThGk/UvmVhVX3buI/AAAAAAAACE8/gLePpDwMK0Y/s400/DSC_0385.JPG" alt="パワーパック スタンダードSの分解" />
+                </a>
+
+                <p>
+                  ケース内部はこんな感じです．
+                  パワーパックを自作した経験がある方であれば，回路構成はすぐに理解できるのではないかと思います．
+                  しかし，省部品による低コスト化が徹底されているようで，かなりシンプルになっています．
+                </p>
+                <p>
+                  写真を見てお気づきになる方もいらっしゃるかもしれませんが，トランジスタに取り付けられている放熱板が不自然です．
+                  なぜか2枚重なっています．
+                  不可解だったのでGoogle画像検索で同製品の分解写真をチェックしてみると，やはり放熱板は1枚の模様です．
+                  おそらく，製品組み立てミスでしょう．
+                  このパワーパックは中古ですが，前ユーザが分解した形跡もありませんでしたし，分解していたとしても部品が増えることはまず考えられないからです．
+                  しかしながら，この組み立てミスに気づけなかったのでしょうか．
+                  ネジの締め具合も，ケースへの取り付け具合も変わってくるはずです．
+                  回路の機能には影響がないと考えられますが，電気機器でこのような事例を見ると，生産体制に疑問を持ってしまいます…．
+                </p>
+
+                <a href="https://lh6.googleusercontent.com/-dO492A5pObA/UvmVhzT5zQI/AAAAAAAACFM/gPURbufZctg/s800/DSC_0386.JPG" data-lightbox="mokei_pwm_ctrl" data-title="パワーパック スタンダードSの内部">
+                  <img src="https://lh6.googleusercontent.com/-dO492A5pObA/UvmVhzT5zQI/AAAAAAAACFM/gPURbufZctg/s400/DSC_0386.JPG" alt="パワーパック スタンダードSの内部" />
+                </a>
+
+                <h4>コンセプト</h4>
+                <p>
+                  PWM制御方式への改造においては，3つの基本方針を設けました．
+                  第1は，パワーパックの外観変更は控えることです．
+                  第2に，パワーパックに元々実装されていた部品や手持ちの部品を流用し，低コスト改造を目指すことです．
+                  第3は，基本的な操作手順（方向切替スイッチおよび速度調整用ツマミ）は変更しないことです．
+                </p>
+                <p>
+                  上記を踏まえて仕様を考えました．
+                  常点灯対応化するとなると，パワーパックのケースに穴を開けることになりますが，操作性優先で常点灯調整用ツマミは新設することにしました．
+                  PWM制御方式のパワーパックを実現する回路としては，大きく分けてタイマICを使用する方法とマイコンを使用する方法の2つがあります．
+                  今回は，家に在庫があったPICマイコンを使用することにしました．
+                  PICマイコンを使用するとなると，プログラムを変更することでパワーパックの機能を変更および拡張することが可能になります．
+                  そこで，機能切替用として，トグルスイッチを1つ新設することにしました．
+                </p>
+
+                <h4>回路</h4>
+                <h5>回路図</h5>
+                <p>
+                  大きな画像で字が細かくなりましたので，回路図はPDFファイルで公開します．
+                  ブラウザで閲覧するか，ダウンロードしてAdobe ReaderなどのPDFビューアでご覧ください．
+                </p>
+                <ul>
+                  <li><a href="img/mokei_pwm-ctrl/schematic.pdf">回路図（PDFファイル）</a></li>
+                </ul>
+
+                <h5>使用部品</h5>
+                <p>
+                  下表に使用部品の一覧を示します．
+                </p>
+                <p>
+                  参考単価欄に「既存部品」と記載されている部品は，元々からパワーパックに組み込まれていた部品です．
+                  私の手元にあった部品で実装することを前提に回路を設計したため，現在では電子部品店で入手しづらい部品もあるかと思います．
+                  参考単価欄に「互換品」と記載されているリンクをクリックすると，秋月電子通商で取り扱っている，互換性があると考えられる部品のページに飛びます．
+                  ただし，私が互換性および動作を確認したわけではありませんので，ご注意ください．
+                  パワーパックに付属している純正ACアダプタはAC出力ですので使用できません．
+                  本ページで公開している回路をそのまま実装する場合は，DC12V出力のACアダプタが必要となります．
+                  もちろん，ご自身で全波整流回路を追加実装する場合は，純正ACアダプタを使用可能です．
+                </p>
+                <p>
+                  部品点数が多いという印象を受けるかもしれませんが，電子部品の単価は安いので，全て購入しても2,000円以下だと思います．
+                  ただし，PICマイコンにプログラムを書き込む機器をお持ちでない場合は，別途，PICkit2などのPICライタの購入が必要な場合があります．
+                </p>
+
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">番号</th>
+                        <th class="mdl-data-table__cell--non-numeric">部品名</th>
+                        <th class="mdl-data-table__cell--non-numeric">型番</th>
+                        <th>数量</th>
+                        <th class="mdl-data-table__cell--non-numeric">参考単価</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CN1</td>
+                        <td class="mdl-data-table__cell--non-numeric">コネクタ</td>
+                        <td class="mdl-data-table__cell--non-numeric">不明 DCジャック &phi;2.1</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CN2</td>
+                        <td class="mdl-data-table__cell--non-numeric">コネクタ</td>
+                        <td class="mdl-data-table__cell--non-numeric">不明 KATOフィーダコード用</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">SW1</td>
+                        <td class="mdl-data-table__cell--non-numeric">回路保護素子</td>
+                        <td class="mdl-data-table__cell--non-numeric">HOSIDEN TBC6012</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">SW2</td>
+                        <td class="mdl-data-table__cell--non-numeric">トグルスイッチ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1回路1接点</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">100円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">SW3</td>
+                        <td class="mdl-data-table__cell--non-numeric">ロータリースイッチ</td>
+                        <td class="mdl-data-table__cell--non-numeric">不明 2回路3接点</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">C1</td>
+                        <td class="mdl-data-table__cell--non-numeric">電解コンデンサ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 25V 470&micro;F</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-06913/" target="_blank">20円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">C2, C3, C5</td>
+                        <td class="mdl-data-table__cell--non-numeric">積層セラミック<br />コンデンサ</td>
+                        <td class="mdl-data-table__cell--non-numeric">村田製作所 50V 0.1&micro;F</td>
+                        <td>3</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00090/" target="_blank">10円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">C4</td>
+                        <td class="mdl-data-table__cell--non-numeric">電解コンデンサ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 25V 47&micro;F</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-03120/" target="_blank">10円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R1</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 330&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R2</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 1k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R3</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 100k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R4</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 10k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">VR1</td>
+                        <td class="mdl-data-table__cell--non-numeric">可変抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">アルファ・エレクトロニクス 2k&Omega; B</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">VR2</td>
+                        <td class="mdl-data-table__cell--non-numeric">可変抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 10k&Omega; B</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00246/" target="_blank">50円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">LED1</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED</td>
+                        <td class="mdl-data-table__cell--non-numeric">不明 &phi;5 緑色 スペーサ付</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">既存部品</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">D1</td>
+                        <td class="mdl-data-table__cell--non-numeric">一般整流ダイオード</td>
+                        <td class="mdl-data-table__cell--non-numeric">日本インター 10EDB10</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-00126/" target="_blank">40円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">D2</td>
+                        <td class="mdl-data-table__cell--non-numeric">ショットキーバリア<br />ダイオード</td>
+                        <td class="mdl-data-table__cell--non-numeric">東芝 2GWJ42</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-02229/" target="_blank">35円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Q1</td>
+                        <td class="mdl-data-table__cell--non-numeric">FET</td>
+                        <td class="mdl-data-table__cell--non-numeric">日立 2SK3142</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-02414/" target="_blank">100円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">U1</td>
+                        <td class="mdl-data-table__cell--non-numeric">3端子レギュレータ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 7805</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-06312/" target="_blank">100円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">U2</td>
+                        <td class="mdl-data-table__cell--non-numeric">PICマイコン</td>
+                        <td class="mdl-data-table__cell--non-numeric">Microchip 16F88-I/P</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-00567/" target="_blank">200円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">X1</td>
+                        <td class="mdl-data-table__cell--non-numeric">セラロック</td>
+                        <td class="mdl-data-table__cell--non-numeric">村田製作所 10MHz</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00146/" target="_blank">30円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">ユニバーサル基板，配線やツマミなど</td>
+                        <td>適量</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">ACアダプタ DC12V センタープラス</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gM-02194/" target="_blank">900円</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h4>回路製作</h4>
+                <p>
+                  まず，パワーパックを分解してプリント基板を取り外します．
+                  上表で「既存部品」として記載されている部品は，改造後も組込みますので，プリント基板やケースから丁寧に取り外してください．
+                  この他，トランジスタ用の放熱板も，FET用の放熱板として転用します．
+                </p>
+
+                <a href="https://lh4.googleusercontent.com/-jWcLfWjmDsQ/UvmVpo0UOJI/AAAAAAAACGU/TLtXtZyaZ-4/s800/DSC_0404.JPG" data-lightbox="mokei_pwm_ctrl" data-title="パワーパック スタンダードSのプリント基板">
+                  <img src="https://lh4.googleusercontent.com/-jWcLfWjmDsQ/UvmVpo0UOJI/AAAAAAAACGU/TLtXtZyaZ-4/s400/DSC_0404.JPG" alt="パワーパック スタンダードSのプリント基板" />
+                </a>
+
+                <p>
+                  プリント基板は紙フェノール製だったので，今回製作する回路も紙フェノール製のユニバーサル基板を用いました．
+                  ユニバーサル基板はプリント基板が取り付けられていた台座に収まるようにカットしておきます．
+                  また，固定用のネジ穴も同じ位置に開けました．
+                </p>
+
+                <a href="https://lh3.googleusercontent.com/-8DhITNugMCE/UvmVjihLfII/AAAAAAAACGg/DYiLpYoBwzE/s800/DSC_0393.JPG" data-lightbox="mokei_pwm_ctrl" data-title="ユニバーサル基板">
+                  <img src="https://lh3.googleusercontent.com/-8DhITNugMCE/UvmVjihLfII/AAAAAAAACGg/DYiLpYoBwzE/s400/DSC_0393.JPG" alt="ユニバーサル基板" />
+                </a>
+
+                <p>
+                  回路製作中の写真は撮り忘れていたのでありません．
+                  最初にICソケットなどの目印になる部品をハンダ付けし，背の低い部品から背の高い部品，熱に強い部品（抵抗など）から熱に弱い部品（コンデンサやFETなど）という順番で実装していきます．
+                  また，トランジスタが取り付けられていた位置にFETを実装するようにしてください．
+                  LEDも同様に，プリント基板上とユニバーサル基板上の取り付け位置を合わせてください．
+                </p>
+
+                <h4>ケース加工</h4>
+                <p>
+                  次に，追加実装する可変抵抗とトグルスイッチの取り付け穴を開けます．
+                  私は，ホームセンターで売っていた，下記のようなACドリルドライバで加工しました．
+                  プラスチック製のケースなので加工は簡単ですが，不器用なので加工精度を出すのは難しいです．
+                  卓上ボール盤が欲しくなります．
+                </p>
+
+                <iframe class="amazon-ads" style="width:120px;height:240px;" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" src="//rcm-fe.amazon-adsystem.com/e/cm?lt1=_blank&bc1=000000&IS2=1&bg1=FFFFFF&fc1=000000&lc1=0000FF&t=keitetsu-22&language=ja_JP&o=9&p=8&l=as4&m=amazon&f=ifr&ref=as_ss_li_til&asins=B002MC6PQC&linkId=28938e5188333025956b3eae4fd74260"></iframe>
+
+                <p>
+                  常点灯調整用の可変抵抗を取り付けるための穴です．
+                  私はケースの右側面に取り付けましたが，各個人が操作しやすい位置に取り付ければ良いと思います．
+                  また，この位置に取り付けると，パワーパックにポイントスイッチを接続した際に干渉する恐れがあります．
+                  私はKATOのポイントスイッチを持っていないので確認できませんが，ケース加工の際は十分に注意してください．
+                </p>
+
+                <a href="https://lh4.googleusercontent.com/-RG17LVz-WWc/UvmVisd47zI/AAAAAAAACFI/8RgZ8dO_svg/s800/DSC_0391.JPG" data-lightbox="mokei_pwm_ctrl" data-title="ケース加工">
+                  <img src="https://lh4.googleusercontent.com/-RG17LVz-WWc/UvmVisd47zI/AAAAAAAACFI/8RgZ8dO_svg/s400/DSC_0391.JPG" alt="ケース加工" />
+                </a>
+
+                <p>
+                  こちらはトグルスイッチを取り付けるための穴です．
+                </p>
+
+                <a href="https://lh6.googleusercontent.com/-0m4yAC42F1A/UvmVjIP4YAI/AAAAAAAACFU/DwMBWAxMRDc/s800/DSC_0392.JPG" data-lightbox="mokei_pwm_ctrl" data-title="ケース加工">
+                  <img src="https://lh6.googleusercontent.com/-0m4yAC42F1A/UvmVjIP4YAI/AAAAAAAACFU/DwMBWAxMRDc/s400/DSC_0392.JPG" alt="ケース加工" />
+                </a>
+
+                <h4>取り付け / 配線</h4>
+                <p>
+                  加工したケースに，完成した基板を組み込みます．
+                  PICマイコンにプログラムを書込み，ICソケットに挿入しておきましょう．
+                  下図は配線後の写真です．
+                  基板はプリント基板が固定されていた位置に綺麗に収まりました．
+                  既存部品の可変抵抗やロータリースイッチは，配線を若干変更の上，基板に直付けしました．
+                  一方，追加実装した可変抵抗とトグルスイッチは，QIコネクタを用いて接続しています．
+                  詳しくは，回路図や拡大写真などを参照してください．
+                </p>
+
+                <a href="https://lh5.googleusercontent.com/-ieM9cF8nC5w/UvmVkyzg2PI/AAAAAAAACFs/hrPQalEL0tg/s800/DSC_0398.JPG" data-lightbox="mokei_pwm_ctrl" data-title="取り付けと配線">
+                  <img src="https://lh5.googleusercontent.com/-ieM9cF8nC5w/UvmVkyzg2PI/AAAAAAAACFs/hrPQalEL0tg/s400/DSC_0398.JPG" alt="取り付けと配線" />
+                </a>
+
+                <a href="https://lh5.googleusercontent.com/-qMzTdlhb7v4/UvmVmfj2W2I/AAAAAAAACF4/rX-NM4QWSMo/s800/DSC_0400.JPG" data-lightbox="mokei_pwm_ctrl" data-title="取り付けと配線">
+                  <img src="https://lh5.googleusercontent.com/-qMzTdlhb7v4/UvmVmfj2W2I/AAAAAAAACF4/rX-NM4QWSMo/s400/DSC_0400.JPG" alt="取り付けと配線" />
+                </a>
+
+                <a href="https://lh6.googleusercontent.com/-a1tOwRPjc3o/UvmVmx0pGZI/AAAAAAAACGA/41U4toJcTSw/s800/DSC_0402.JPG" data-lightbox="mokei_pwm_ctrl" data-title="取り付けと配線">
+                  <img src="https://lh6.googleusercontent.com/-a1tOwRPjc3o/UvmVmx0pGZI/AAAAAAAACGA/41U4toJcTSw/s400/DSC_0402.JPG" alt="取り付けと配線" />
+                </a>
+
+                <h4>プログラム</h4>
+                <h5>開発環境</h5>
+                <p>
+                  下記の環境で動作を確認しておりますが，動作を保証するものではありません．
+                  自己責任の上でご利用ください．
+                  MPLAB X IDEおよびMPLAB XC8はMicrochipが提供しているフリーウェアです．
+                  Windows版はもちろんのこと，Linux版も配布されています．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">PIC</th>
+                      <td class="mdl-data-table__cell--non-numeric">16F88-I/SP</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">MPLAB X IDE</th>
+                      <td class="mdl-data-table__cell--non-numeric">MPLAB X IDE v1.95 for Mac</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">MPLAB XC8</th>
+                      <td class="mdl-data-table__cell--non-numeric">MPLAB XC8 C Compiler v1.21 for Mac</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">PICkit 2</th>
+                      <td class="mdl-data-table__cell--non-numeric">MPLAB X IDEを使用して書込み</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h5>プログラム例</h5>
+                <p>
+                  プログラム例はGitHubで公開しています．
+                  下記のリンクから参照してください．
+                  また，このプログラムはMPLAB XC8 C Compiler向けです．Cコンパイラの種類にご注意ください．
+                </p>
+                <ul>
+                  <li><a href="https://github.com/KeitetsuWorks/16F88_KATO_PowerPack.X" target="_blank">KeitetsuWorks/16F88_KATO_PowerPack.X</a></li>
+                </ul>
+                <p>
+                  PICマイコンが搭載しているCCP1モジュールを用いてPWM信号を出力しています．
+                  このプログラムにおいては，PWM信号のデューティ比の分解能は9bit (0～511)です．
+                  このうち，0～127までの範囲は，速度調整用ツマミだけではなく常点灯調整用ツマミでも調整することが可能です．
+                  したがって，速度調整用ツマミが0の状態でも，常点灯調整用ツマミを調整しておくことで室内灯，ヘッドライトやテールライトなどが点灯するデューティ比の出力を維持できます．
+                  また，RA2ピンに接続されているトグルスイッチによって，PWM信号の周波数を約1.22kHzまたは約19.53kHzに切り替えることが可能です．
+                  1.22kHzの場合，モータからは「キー」という励磁音が発生しますので，少し耳障りに感じるかもしれません．
+                  一方，19.53kHzの場合は周波数が可聴域の上限に近いため，大変静かになります．
+                  詳しくは，プログラムを解読してみてください．
+                </p>
+                <p>
+                  私も素人ですので，プログラム中にバグや不要な記述などがあるかもしれません．
+                  また，プログラムを変更することで，パワーパックの機能を変更および拡張することが可能かと思います．
+                  プログラムに関するご指摘や改変事例などがありましたら，私としましても是非参考にさせていただきたいので，ご連絡をいただければ幸いです．
+                </p>
+
+                <h4>完成</h4>
+                <p>
+                  PWM制御方式の採用で常点灯対応となり，安定した低速運転が可能となりました．
+                  後日，デモ動画をアップロードできればと思います．
+                </p>
+
+                <a href="https://lh5.googleusercontent.com/-jx_R7KWzvqQ/UvmVkXuCD1I/AAAAAAAACFk/oDXW4PNcsTU/s800/DSC_0397.JPG" data-lightbox="mokei_pwm_ctrl" data-title="完成">
+                  <img src="https://lh5.googleusercontent.com/-jx_R7KWzvqQ/UvmVkXuCD1I/AAAAAAAACFk/oDXW4PNcsTU/s400/DSC_0397.JPG" alt="完成" />
+                </a>
+
+                <p>
+                  TOMIXの線路でこのパワーパックを使用する場合は，下図のようなケーブルを自作してください．
+                </p>
+
+                <a href="https://lh5.googleusercontent.com/-06HXDE5tzpI/UvmVqAWH8sI/AAAAAAAACGY/w1XEhVtY6V8/s800/DSC_0405.JPG" data-lightbox="mokei_pwm_ctrl" data-title="TOMIXの線路で使用するための変換ケーブル">
+                  <img src="https://lh5.googleusercontent.com/-06HXDE5tzpI/UvmVqAWH8sI/AAAAAAAACGY/w1XEhVtY6V8/s400/DSC_0405.JPG" alt="TOMIXの線路で使用するための変換ケーブル" />
+                </a>
+
+                <h4>更新履歴</h4>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric"">日付</th>
+                        <th class="mdl-data-table__cell--non-numeric">内容</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2017/11/23</td>
+                        <td class="mdl-data-table__cell--non-numeric">プログラム例の公開方法をGitHubに変更</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/10/06</td>
+                        <td class="mdl-data-table__cell--non-numeric">使用部品表および回路図の誤記を修正（正: 10EDB10，誤: 10EB10）</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/02/23</td>
+                        <td class="mdl-data-table__cell--non-numeric">回路図のDCジャックの誤配線を修正</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/02/20</td>
+                        <td class="mdl-data-table__cell--non-numeric">回路図の日付誤記を修正</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/02/12</td>
+                        <td class="mdl-data-table__cell--non-numeric">使用部品表に記載されている，ACアダプタのリンクおよび価格を修正</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/02/11</td>
+                        <td class="mdl-data-table__cell--non-numeric">公開開始</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>

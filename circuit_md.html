@@ -1,0 +1,193 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - モータドライバ">
+    <title>KeitetsuWorks - モータドライバ</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>モータドライバ</h3>
+                <p>
+                  モータドライバとは，モータの制御回路のことです．
+                  ここでは，模型用の小型モータをマイコンで制御することを最終目標とし，モータドライバの基礎から応用までを掲載します．
+                </p>
+                <h4>DCモータの動作</h4>
+                <p>
+                  一般にミニ四駆などの玩具に組み込まれ，「DCモータ」と呼ばれているタイプは，
+                  専門的には「整流子電動機」の中でも「永久磁石界磁方式」というカテゴリに分類されます．
+                  詳しくはWikipediaなどを参照してください．
+                </p>
+                <p>
+                  DCモータには「ストップ」，｢正転｣，「逆転」，「ブレーキ」と呼ばれる4つの基本動作があります．
+                  ご存知のとおり，DCモータは電流方向を変えることで回転方向が変わります．
+                  「ストップ」とはモータに電流が流れていない状態，回転していない状態のことです．
+                  「ブレーキ｣とは，モータの両端子を短絡させ，回転中のモータ自身の逆起電力を使ってモータの回転にブレーキをかける動作のことです．
+                  モータの逆起電力については，後ほど簡単に説明します．
+                </p>
+                <p>
+                  また，「正転」及び「逆転」を，「CW（ClockWise，時計回り）」及び「CCW（Counter ClockWise，反時計回り）」と表現することも多いです．
+                </p>
+                <h4>最も簡単なモータドライバ</h4>
+                <img src="img/circuit_md/circuit_md_img01.gif" alt="最も簡単なモータドライバ" />
+                <p>
+                  初歩的な考え方ですが，「ブレーキ」以外の動作であれば電源の極性を入れ替えるだけで実現できます．
+                  直流電源の記号ではなく，電源とグランドの記号で表現することが多いので併記しておきます．
+                </p>
+                <p>
+                  グランドは基準電位のことで，基本的には電源の0V端子に接続します．
+                  電源が1つで電池の場合はマイナス極がグランドとなりますが，電源が複数ある場合や，正電源と負電源が共存する場合は注意してください．
+                </p>
+                <h4>Tブリッジ回路</h4>
+                <img src="img/circuit_md/circuit_md_img02.gif" alt="Tブリッジ回路" />
+                <p>
+                  電源を2つ用意することで，回転方向を変えることができる回路です．
+                  T字状に結線している特徴から，「Tブリッジ回路」と呼ばれているようです．
+                  スイッチを切り替えることでモータに流れる電流の方向が変わるのがわかるでしょうか．
+                </p>
+                <p>
+                  この回路の禁止操作は，2つのスイッチを同時に閉じてしまうことです．
+                  短絡してしまうので大変危険です．実際のところ，電源が2つ必要なTブリッジ回路が使われることはありません．
+                </p>
+                <h4>Hブリッジ回路（フルブリッジ回路）</h4>
+                <img src="img/circuit_md/circuit_md_img03.gif" alt="Hブリッジ回路（フルブリッジ回路）" />
+                <p>
+                  これまで紹介してきたモータドライバの中で，最も実用されている回路です．
+                  前述した4つの基本動作が，単一の電源で全て実現できる回路です．
+                  H字状に結線している特徴から，「Hブリッジ回路」と呼ばれています． 
+                </p>
+                <p>
+                  また，SW1とSW3のように電源と負荷（モータ）の間にあり，負荷に流れる電流を制御するスイッチを「ハイサイドスイッチ」，
+                  SW2とSW4のように負荷（モータ）とグランドの間にあり，負荷に流れる電流を制御するスイッチを「ローサイドスイッチ」と呼びます．
+                </p>
+                <h4>トグルスイッチでモータ制御</h4>
+                <img src="img/circuit_md/circuit_md_img04.jpg" alt="ミヤマ電器 MS500J-B" />
+                <img src="img/circuit_md/circuit_md_img05.gif" alt="2回路2接点トグルスイッチの動作" />
+                <p>
+                  スイッチでモータを制御する方法として，上図のような2回路2接点タイプのトグルスイッチを使った方法がよく知られています．
+                  トグルスイッチ（スナップスイッチ）とは，レバー操作によって接点を切り替えるスイッチのことです．
+                  トグルスイッチには様々なタイプがありますが，1回のレバー操作によって，2箇所のON-OFF操作が可能な
+                  「2回路2接点タイプ」は，「2極双投タイプ」や「6端子タイプ」とも呼ばれています．
+                  「2回路2接点タイプ」も，中立点がないタイプや，レバーから手を離しても操作状態を保持するオルタネイト（自己保持）タイプ，
+                  レバーから手を離すと自動的に中立点に復帰するモーメンタリ（自動復帰）タイプに分類されます．
+                  使用用途を考慮して選定してください．
+                </p>
+                <img src="img/circuit_md/circuit_md_img06.gif" alt="回路図と配線図" />
+                <p>
+                  実際に2回路2接点タイプのトグルスイッチで回路を組むと，上図のようになります．
+                  中立点のあるタイプを用いれば，DCモータの基本動作のうち「ストップ」，「正転」，「逆転」の3つが実現可能です．
+                  スイッチ1つだけで，かなり実用的な回路が組めることがわかります．
+                </p>
+                <h4>Nch MOS FETとPch MOS FETで構成するモータドライバ</h4>
+                <ul>
+                  <li><a href="circuit_md_fet_pn.html">FETモジュール MP4212を使用したモータドライバ</a></li>
+                </ul>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>

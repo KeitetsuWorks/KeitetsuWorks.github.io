@@ -1,0 +1,371 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - Quartus IIの使用方法 - 加算器のFPGA実装">
+    <title>KeitetsuWorks - Quartus IIの使用方法 - 加算器のFPGA実装</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>Quartus IIの使用方法 - 加算器のFPGA実装</h3>
+                <h4>はじめに</h4>
+                <p>
+                  ここでは，Quartus IIを用いたFPGA開発の手順について解説していきます．
+                  組合せ回路の基本である桁上げ伝搬加算器をVHDLで記述し，RTLシミュレーションで動作を確認した後にTerasic DE0に実装してみます．
+                  VHDLでの回路設計に関する解説は割愛しますが，記述例を掲載しますのでご覧ください．
+                  FPGA開発ボードが手元になくても，RTLシミュレーションでHDL記述の動作を確認できるので，HDLの勉強の参考にもなるのではないでしょうか．
+                </p>
+                <p>
+                  初回の<a href="fpga_tutorial_adder_syn.html">加算器の作成</a>では，Quartus IIのプロジェクト作成から加算器の記述までについて解説しました．
+                  前回の<a href="fpga_tutorial_adder_sim.html">加算器のRTLシミュレーション</a>では，Quartus IIとModelSimの連携と，ModelSimを用いたRTLシミュレーションの実行について解説しました．
+                  本ページでは，加算器のFPGA実装に向けたピン配置などの設定と，プログラム方法について書いてみたいと思います．
+                </p>
+                <p>
+                  以降で掲載するスクリーンショットは下記の環境のものです．
+                  Quartus IIのインストール方法については<a href="fpga_quartus2_install.html">こちら</a>をご覧ください．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">OS</th>
+                      <td class="mdl-data-table__cell--non-numeric">Microsoft Windows 7 Professional x64 Service Pack 1</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">Quartus II</th>
+                      <td class="mdl-data-table__cell--non-numeric">Altera Quartus II 12.0sp2 Web Edition</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">ModelSim</th>
+                      <td class="mdl-data-table__cell--non-numeric">Mentor Graphics ModelSim-Altera Starter Edition v10.0d Service Pack 2</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h4>Pin Plannerによるピン配置</h4>
+                <p>
+                  Quartus IIを起動し，プロジェクトを開いた状態から始めます．
+                  <a href="fpga_tutorial_adder_syn.html">コンパイル</a>と<a href="fpga_tutorial_adder_sim.html">RTLシミュレーション</a>を繰り返し，
+                  文法エラーや意図しない動作がないことは確認済みであるものとします．
+                  左上の「Assignments」から「Pin Planner」を選択します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog01.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog01.png" alt="Quartus II" />
+                </a>
+                <p>
+                  「Pin Planner」ウィンドウが開きます．下部の表の「Node Name」には，回路記述上で使用している入出力ピン名が並んでいると思います．
+                  ここでは，各入出力ピンを実際のFPGAのどのピンに割り当てるかを設定します．
+                  DE0に付属しているユーザマニュアルにFPGAのピン名と周辺回路との対応関係が掲載されていますので，ユーザマニュアルを見ながら設定を行ってください．
+                  今回は加算器の入力計9bitをスライドスイッチ9個に，出力計5bitをLED5個に割り当てました．
+                  一応，割り当て表を掲載しておきます．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Node Name</th>
+                        <th class="mdl-data-table__cell--non-numeric">Direction</th>
+                        <th class="mdl-data-table__cell--non-numeric">Location (FPGA Pin No.)</th>
+                        <th class="mdl-data-table__cell--non-numeric">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">A[3]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_G4</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[3]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">A[2]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_H6</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[2]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">A[1]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_H5</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[1]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">A[0]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_J6</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[0]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">B[3]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_E3</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[7]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">B[2]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_H7</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[6]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">B[1]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_J7</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[5]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">B[0]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_G5</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[4]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CI</td>
+                        <td class="mdl-data-table__cell--non-numeric">Input</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_E4</td>
+                        <td class="mdl-data-table__cell--non-numeric">Slide Switch[8]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CO</td>
+                        <td class="mdl-data-table__cell--non-numeric">Output</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_F2</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED Green[4]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">S[3]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Output</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_H1</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED Green[3]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">S[2]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Output</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_J3</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED Green[2]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">S[1]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Output</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_J2</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED Green[1]</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">S[0]</td>
+                        <td class="mdl-data-table__cell--non-numeric">Output</td>
+                        <td class="mdl-data-table__cell--non-numeric">PIN_J1</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED Green[0]</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  各ピンの「Location」列をダブルクリックすると，選択肢のプルダウンメニューが表示されるので，対応するピン名を選択してください．
+                  ピン配置の設定が終わったら，Pin Plannerを閉じましょう．
+                </p>
+
+                <a href="img/fpga_tutorial_adder/prog02.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog02.png" alt="Quartus II" />
+                </a>
+                <p>
+                  Pin Plannerによるピン配置設定は大変面倒であることがわかっていただけると思います．
+                  共通の入出力ピン名を使用して異なる回路を記述する予定がある場合は，今回のピン配置設定をエクスポートして，異なるプロジェクトにインポートすることも可能です．
+                  ピン配置設定を省力化できるので便利です．
+                </p>
+                <p>
+                  Pin Plannerの「File」から「Export」を選択します．
+                  この作業で出力される設定ファイルはcsv形式ですので，エクスポート後もテキストエディタやExcelなどで簡単に編集できます．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog03.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog03.png" alt="Quartus II" />
+                </a>
+                <p>
+                  プロジェクトにピン設定をインポートしたい場合は「Assignments」の「Import Assignments...」を選択しましょう．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog04.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog04.png" alt="Quartus II" />
+                </a>
+                <p>
+                  次に，未使用ピンについての設定を行います．
+                  Quartus IIのウィンドウ左側のエンティティ一覧に表示されているのデバイス名を右クリックし，「Device...」を選択します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog05.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog05.png" alt="Quartus II" />
+                </a>
+                <p>
+                  「Device」ウィンドウが開くので，中央付近の「Device and Pin Options...」を選択します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog06.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog06.png" alt="Quartus II" />
+                </a>
+                <p>
+                  「As output driving ground」に変更します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog07.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog07.png" alt="Quartus II" />
+                </a>
+                <p>
+                  コンパイルを実行します．
+                  警告が十数個出ますが，無視できる内容だと思います．
+                  これでFPGAに実装する準備が整いました．
+                </p>
+                <a href="img/fpga_tutorial_adder/syn08.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/syn08.png" alt="Quartus II" />
+                </a>
+
+                <h4>FPGAに実装する - USB-Blasterの準備</h4>
+                <p>
+                  DE0にプログラムするためには，USB-Blasterのドライバのインストールを完了しておく必要があります．
+                  DE0とPCをUSBケーブルで接続し，DE0の電源を投入すると，
+                  「デバイス マネージャ」に「USB-Blaster」が表示されるので，「ドライバ ソフトウェアの更新」を行ってください．
+                  ドライバは以下のフォルダにあります．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <td class="mdl-data-table__cell--non-numeric">C:\altera\12.0sp2\quartus\drivers\usb-blaster</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h4>FPGAに実装する - プログラム</h4>
+                <p>
+                  DE0とPCをUSBケーブルで接続し，DE0の電源を投入してから，下図に示すアイコンを選択して「Programmer」を起動します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog08.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog08.png" alt="Quartus II" />
+                </a>
+                <p>
+                  「Programmer」が起動します．
+                  「Hardware Setup...」の横に「USB-Blaster [USB-0]」と表示されていることを確認します．
+                  「No Hardware」と表示されている場合は，「Hardware Setup...」を選択して，
+                  「Currently selected hardware:」を「USB-Blaster [USB-0]」に変更してください．
+                  「USB-Blaster [USB-0]」が選択肢にない場合は，Quartus IIのインストールに失敗している可能性があります．
+                  下記に解決策の1つをまとめましたので，ご一読ください．
+                </p>
+                <ul>
+                  <li>blog 渓鉄: <a href="http://keitetsu.blogspot.jp/2012/06/quartus-ii-v120usb-blaster.html" target="_blank">Quartus II v12.0でUSB-Blasterが認識されない場合の対処方法</a></li>
+                </ul>
+                <p>
+                  「Mode」は「JTAG」になっていること，「Program/Configure」にチェックが入っていることを確認したら，「Start」を選択します．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog09.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog09.png" alt="Quartus II" />
+                </a>
+                <p>
+                  「Progress:」が「100% (Successful)」になればプログラム完了です．
+                </p>
+                <a href="img/fpga_tutorial_adder/prog10.png" data-lightbox="prog" data-title="Quartus II">
+                  <img src="img/fpga_tutorial_adder/prog10.png" alt="Quartus II" />
+                </a>
+                <p>
+                  スライドスイッチを操作して，LEDの点滅との対応を確認し，回路記述が正しいか確認しましょう．
+                </p>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - 16F84AとMPLAB XC8を用いたカウンタ回路の製作例を紹介します．数字は7セグメントLEDに表示します．">
+    <title>KeitetsuWorks - 16F84A XC8開発例 - カウンタ回路（7セグメントLEDの制御）</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <link rel="stylesheet" href="css/monokai.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link is-active" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>16F84A XC8開発例 - カウンタ回路（7セグメントLEDの制御）</h3>
+                <h4>はじめに</h4>
+                <p>
+                  本ページでは，PIC16F84AとMPLAB XC8 C Compilerを使用した開発例として，1桁の10進数を1秒毎にカウントアップして7セグメントLEDに表示する回路（以降，カウンタ回路）を紹介します．
+                </p>
+                <p>
+                  下記の環境で動作を確認しておりますが，動作を保証するものではありません．
+                  掲載情報は自己責任の上でご利用ください．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">PIC</th>
+                      <td class="mdl-data-table__cell--non-numeric">16F84A</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">MPLAB IDE</th>
+                      <td class="mdl-data-table__cell--non-numeric">MPLAB IDE v8.91</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">MPLAB XC8</th>
+                      <td class="mdl-data-table__cell--non-numeric">MPLAB XC8 C Compiler v1.20</td>
+                    </tr>
+                    <tr>
+                      <th class="mdl-data-table__cell--non-numeric">PICkit 2</th>
+                      <td class="mdl-data-table__cell--non-numeric">Application Version 2.61.00 / Device File Version 1.61.00</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <h4>回路</h4>
+                <h5>回路図</h5>
+                <p>
+                  今回はブレッドボード上に回路を組むことにしました．
+                  PICkit 2によるICSP (In Circuit Serial Programming)と電源供給を行うことし，回路部品数は必要最低限に抑えています．
+                </p>
+                <a href="img/pic_xc8_84a_counter/schematic.png" data-lightbox="counter" data-title="カウンタ回路">
+                  <img src="img/pic_xc8_84a_counter/schematic.png" alt="カウンタ回路" />
+                </a>
+
+                <h5>回路部品</h5>
+                <p>
+                  上記の回路図中で使用している回路部品のリストです．
+                  参考単価は，7セグメントLEDを除き，秋月電子通商で購入した場合のものです．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">番号</th>
+                        <th class="mdl-data-table__cell--non-numeric">部品名</th>
+                        <th class="mdl-data-table__cell--non-numeric">型番</th>
+                        <th>数量</th>
+                        <th class="mdl-data-table__cell--non-numeric">参考単価</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">U1</td>
+                        <td class="mdl-data-table__cell--non-numeric">PICマイコン</td>
+                        <td class="mdl-data-table__cell--non-numeric">Microchip 16F84A</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">220円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">X1</td>
+                        <td class="mdl-data-table__cell--non-numeric">セラロック</td>
+                        <td class="mdl-data-table__cell--non-numeric">村田製作所 10MHz</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">30円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">LED1</td>
+                        <td class="mdl-data-table__cell--non-numeric">7セグメントLED</td>
+                        <td class="mdl-data-table__cell--non-numeric">PARA LIGHT C-421E（カソードコモン）</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R1</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 10k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">1円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R2 - 8</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 200&Omega;</td>
+                        <td>7</td>
+                        <td class="mdl-data-table__cell--non-numeric">1円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">リード線など</td>
+                        <td>適量</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h4>プログラム</h4>
+                <p>
+                  下記のプログラムはMPLAB XC8 C Compiler向けです．Cコンパイラの種類にご注意ください．
+                </p>
+<pre><code class="language-c">
+#include &lt;xc.h&gt;
+
+#define _XTAL_FREQ 10000000   // 10MHz
+
+__CONFIG(HS & WDTDIS & PWRTDIS & UNPROTECT);
+
+void main()
+{
+    unsigned char i;  // 制御変数
+    unsigned char pattern[10] = {
+        // gfedcba      // 7セグメントLED用点灯パターン
+        0b00111111,     // 0
+        0b00000110,     // 1
+        0b01011011,     // 2
+        0b01001111,     // 3
+        0b01100110,     // 4
+        0b01101101,     // 5
+        0b01111100,     // 6
+        0b00000111,     // 7
+        0b01111111,     // 8
+        0b01100111      // 9
+    };
+    
+    TRISA = 0x00;   // PORTA入出力設定
+    TRISB = 0x00;   // PORTB入出力設定
+    PORTA = 0x00;   // PORTA初期化
+    PORTB = 0x00;   // PORTB初期化
+    
+    while (1) {     // 無限ループ
+        for (i = 0; i <= 9; i++) {  // 0から9までカウントアップ
+            PORTB = pattern[i];     // カウント値に対応する点灯パターンをPORTBに設定
+            __delay_ms(1000);       // 1秒タイマ
+        }
+    }
+}
+</code></pre>
+
+                <h4>実装</h4>
+                <h5>回路構成例</h5>
+                <p>
+                  上記の回路図を基に，ブレッドボード上に回路を組み立てました．電源はPICKit 2から供給しています．
+                </p>
+                <a href="img/pic_xc8_84a_counter/circuit.jpg" data-lightbox="counter" data-title="カウンタ回路">
+                  <img src="img/pic_xc8_84a_counter/circuit.jpg" alt="カウンタ回路" />
+                </a>
+
+                <h5>動作例</h5>
+                <p>
+                  上記のプログラムを実際に動作させたときの映像です．
+                </p>
+                <iframe class="youtube-video-player" width="640" height="360" src="//www.youtube.com/embed/sERRo7RyiZw" frameborder="0" allowfullscreen></iframe>
+
+                <h4>__delay_ms関数にエラーマークが表示されるときは</h4>
+                <p>
+                  文法や関数の利用方法に問題がなくコンパイルが成功するにも関わらず，
+                  __delay_ms関数や__delay_us関数にエラー（警告）マークが表示される場合，下記の記事をご一読ください．
+                </p>
+                <ul>
+                  <li>blog 渓鉄: <a href="http://keitetsu.blogspot.jp/2013/10/mplab-xxc8delayms.html" target="_blank">MPLAB X+XC8で__delay_ms関数にエラーマークが表示される問題の解決方法</a></li>
+                </ul>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <script src="js/highlight.pack.js"></script>
+    <script>hljs.highlightAll();</script>
+  </body>
+</html>

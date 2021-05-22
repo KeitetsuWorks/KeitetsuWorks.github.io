@@ -1,0 +1,80 @@
+html, body {
+  font-family: 'Noto Sans JP', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Sans JP', 'Helvetica', sans-serif;
+}
+
+.mdl-keitetsu .contents {
+  max-width: 1080px;
+}
+
+.mdl-keitetsu .mdl-card__media img.article-image {
+  width: 100%;
+  height: auto;
+  border: 0;
+}
+
+.mdl-keitetsu .mdl-card__subtitle-text {
+  padding: 16px;
+}
+
+.mdl-keitetsu .mdl-card__supporting-text {
+  width: initial;
+}
+
+.mdl-keitetsu .mdl-card__banner {
+  display: block;
+  margin: 16px auto;
+}
+
+.mdl-keitetsu section.article {
+  padding: 16px;
+}
+
+.mdl-keitetsu section.article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16px auto;
+}
+
+.mdl-keitetsu section.article .table-wrap {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.mdl-keitetsu section.article table {
+  margin: 16px auto;
+}
+
+.mdl-keitetsu section.article .amazon-ads {
+  display: block;
+  margin: 16px auto;
+}
+
+.mdl-keitetsu section.article .youtube-video-player {
+  display: block;
+  margin: 16px auto;
+}
+
+.mdl-keitetsu .mdl-cell--amazon-banner {
+  padding: 16px;
+}
+
+.mdl-keitetsu .amazon-banner-1 {
+  position: fixed;
+  width: 120px;
+  display: block;
+  margin: 0 auto;
+}
+
+.mdl-keitetsu .amazon-banner-2 {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}

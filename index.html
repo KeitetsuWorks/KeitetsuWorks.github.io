@@ -1,0 +1,238 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - Keitetsuのホームページ．鉄道模型や電子工作について情報発信します．">
+    <title>KeitetsuWorks</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab is-active" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link is-active" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text">KeitetsuWorks</h1>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <p>
+                    Keitetsuのホームページへようこそ．
+                    ページ上部のメニューから各ページをご覧ください．
+                    2021年現在は，<a href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>を主に更新しています．
+                  </p>
+                  <p>
+                    Keitetsuは，日本在住の組込みシステム技術者です．高専卒業生です．
+                    趣味は電子工作，旅行と鉄道模型です．このほか，カメラとマンガやアニメも好きです．
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text" id="accounts">アカウント</h1>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <p>
+                    SNSなどはKeitetsuまたはKeitetsuWorksというユーザ名で利用している場合が多いです．
+                    以前はメールアドレスを公開しておりましたが，現在は公開を中止しています．
+                  </p>
+                  <ul class="mdl-list">
+                    <li class="mdl-list__item">
+                      <span class="mdl-list__item-primary-content">
+                        <i class="mdl-list__item-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                          </svg>
+                        </i>
+                        <a href="https://twitter.com/KeitetsuWorks" target="_blank">KeitetsuWorks</a>
+                      </span>
+                    </li>
+                    <li class="mdl-list__item">
+                      <span class="mdl-list__item-primary-content">
+                        <i class="mdl-list__item-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                          </svg>
+                        </i>
+                        <a href="https://github.com/KeitetsuWorks" target="_blank">KeitetsuWorks</a>
+                      </span>
+                    </li>
+                    <li class="mdl-list__item">
+                      <span class="mdl-list__item-primary-content">
+                        <i class="mdl-list__item-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                            <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.122C.002 7.343.01 6.6.064 5.78l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                          </svg>
+                        </i>
+                        <a href="https://www.youtube.com/channel/UCw0H30msevc1j4h0hGloHSQ" target="_blank">KeitetsuWorks</a>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text" id="help">掲載内容について</h1>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <p>
+                    このホームページは，個人により開設・運営しております．
+                    このホームページで扱う全ての企業や団体には一切関係ありません．
+                  </p>
+                  <p>
+                    このホームページを利用した事によって損害が生じた場合でも，こちらは一切責任を負いません．予めご了承ください．
+                  </p>
+                  <p>
+                    このホームページの掲載内容については誤りがないように注意していますが，万一発見された場合は<a href="#accounts">Twitter</a>にてご報告いただければ幸いです．
+                    また，質問につきましても<a href="#accounts">Twitter</a>にてご連絡ください．ただし，返信できない場合がございます．予めご了承ください．
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text" id="copyright">著作権について</h1>
+                </div>
+                <div class="mdl-card__supporting-text">
+                  <p>
+                    特記があるものを除き，写真は全てKeitetsuが撮影したものです．
+                    特記があるものを除き，写真・資料・ページデザインなどの著作権は全てKeitetsuに帰属します．
+                  </p>
+                  <p>
+                    個人で楽しむなどの他は，写真等の複製・再配布はご遠慮ください．
+                    転載をご希望される場合は，必ず事前に<a href="#accounts">Twitter</a>にてご相談ください．
+                    ご理解とご協力をお願いいたします．
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text">acty</h1>
+                </div>
+                <div class="mdl-card__subtitle-text">友人のページ．列車運転ゲーム TRAIN CREWなど．</div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://acty-soft.com/" target="_blank">移動する</a>
+                </div>
+              </div>
+              <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text">パソコンつくーる</h1>
+                </div>
+                <div class="mdl-card__subtitle-text">友人のページ．自作PCの最新情報，パーツレビューなど．</div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="http://pctukuru.blog86.fc2.com/" target="_blank">移動する</a>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text">鉄ネット</h1>
+                </div>
+                <div class="mdl-card__subtitle-text">鉄道ファンのためのディレクトリ型サーチエンジン</div>
+                <div class="mdl-card__banner">
+                  <a href="http://www.tetsunet.net/system/rank.php?mode=r_link&id=81" target="_blank">
+                    <img src="img/tetsunet_banner10.gif" alt="Tetsunet.net" />
+                  </a>
+                </div>
+              </div>
+              <div class="mdl-card mdl-cell mdl-cell--6-col mdl-shadow--4dp">
+                <div class="mdl-card__title">
+                  <h1 class="mdl-card__title-text">時間のないサイト運営者リング</h1>
+                </div>
+                <div class="mdl-card__subtitle-text">この頃，ホント時間ないんです．すみません．</div>
+                <div class="mdl-card__banner">
+                  <a href="https://sites.google.com/site/happybusy/" target="_blank">
+                    <img src="img/banner_happybusy.png" alt="時間のないサイト運営者リング"/>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - KATO キハ82 室内灯白色LED化">
+    <title>KeitetsuWorks - KATO キハ82 室内灯白色LED化</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>KATO キハ82（旧製品）</h3>
+                <p>
+                  以前，友人から譲ってもらったキハ82の室内灯を白色LEDしてみました．
+                </p>
+                <p>
+                  このキハ82はKATOの旧製品で，現行製品とは随所に違いが見られます．
+                  車輪や集電板の汚れが原因の集電不良が酷かったので，ゆっくり整備しているところです．
+                </p>
+                <p>
+                  ヘッドライト・テールライトもオプションだったようですが，片側の先頭車両にのみ取り付けられていました．
+                  もう片側の先頭車両にはライト基板が取り付けられていないため，LEDを使った自作基板を取り付けようと思索中です．
+                  ヘッドマークも新しいものを用意してあるので，後日取り付ける予定です…．
+                </p>
+                <a href="img/mokei_led_04/img01.jpg" data-lightbox="mokei_led_04" data-title="KATO キハ82（旧製品）">
+                  <img src="img/mokei_led_04/img01.jpg" alt="KATO キハ82（旧製品）" />
+                </a>
+
+                <h4>室内灯白色LED化</h4>
+                <p>
+                  自作した室内灯回路を組み込みました．
+                  白色LEDは秋月電子で購入したOSWT3166Bです．
+                  ブリッジダイオードと定電流ダイオードを使って点灯させています．
+                </p>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">番号</th>
+                        <th class="mdl-data-table__cell--non-numeric">部品名</th>
+                        <th class="mdl-data-table__cell--non-numeric">型番</th>
+                        <th>数量</th>
+                        <th class="mdl-data-table__cell--non-numeric">参考価格</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">LED1</td>
+                        <td class="mdl-data-table__cell--non-numeric">白色LED</td>
+                        <td class="mdl-data-table__cell--non-numeric">OSWT3166B</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">10円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">D1</td>
+                        <td class="mdl-data-table__cell--non-numeric">ブリッジダイオード</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">D2</td>
+                        <td class="mdl-data-table__cell--non-numeric">定電流ダイオード</td>
+                        <td class="mdl-data-table__cell--non-numeric">E-153</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p>
+                  1番目の写真がKATOの旧室内灯（麦球），2番目の写真が自作した室内灯（白色LED）です．
+                  やはり，蛍光灯の再現には白色LEDがベストです．
+                </p>
+                <a href="img/mokei_led_04/img02.jpg" data-lightbox="mokei_led_04" data-title="KATOの旧室内灯（麦球）">
+                  <img src="img/mokei_led_04/img02.jpg" alt="KATOの旧室内灯（麦球）" />
+                </a>
+                <a href="img/mokei_led_04/img03.jpg" data-lightbox="mokei_led_04" data-title="自作した室内灯（白色LED）">
+                  <img src="img/mokei_led_04/img03.jpg" alt="自作した室内灯（白色LED）" />
+                </a>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>

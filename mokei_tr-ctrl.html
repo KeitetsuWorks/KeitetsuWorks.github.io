@@ -1,0 +1,296 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="KeitetsuWorks - 鉄道模型用パワーパックの自作">
+    <title>KeitetsuWorks - 鉄道模型用パワーパックの自作</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.css">
+
+    <script src="js/common.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PSLDBJZ3HB');
+    </script>
+  </head>
+  <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
+    <div class="mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--waterfall">
+        <!-- Top row, always visible -->
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">KeitetsuWorks</span>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a class="mdl-layout__tab" href="index.html">トップページ</a>
+          <a class="mdl-layout__tab" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-layout__tab is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-layout__tab" href="circuit.html">電子工作</a>
+          <a class="mdl-layout__tab" href="notebook.html">雑記</a>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">KeitetsuWorks</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="index.html">トップページ</a>
+          <a class="mdl-navigation__link" href="https://keitetsu.blogspot.com/" target="_blank">BLOG</a>
+          <a class="mdl-navigation__link is-active" href="mokei.html">鉄道模型</a>
+          <a class="mdl-navigation__link" href="circuit.html">電子工作</a>
+          <a class="mdl-navigation__link" href="notebook.html">雑記</a>
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+        <div class="contents mdl-grid mdl-grid--no-spacing">
+          <div class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+            <div class="mdl-grid">
+              <section class="mdl-cell mdl-cell--12-col mdl-shadow--4dp article">
+                <h3>鉄道模型用パワーパックの自作</h3>
+                <p>
+                  市販品より安価でコンパクトなパワーパックを自作しました．
+                  回路は定番かつ大変シンプルなもので，初心者でも手軽に作ることができると思います．
+                  電源にはACアダプタのほか，安定化電源や乾電池などが利用可能です．
+                </p>
+
+                <h4>回路</h4>
+                <h5>回路図</h5>
+                <a href="img/mokei_tr-ctrl/tr-ctrl_img01.gif" data-lightbox="mokei_tr_ctrl" data-title="回路図">
+                  <img src="img/mokei_tr-ctrl/tr-ctrl_img01.gif" alt="回路図" />
+                </a>
+
+                <h5>使用部品</h5>
+                <p>
+                  トランジスタは発熱する場合がありますので，必要に応じて放熱板を取り付けてください．
+                  LED1は電源確認用なので省略可能です．
+                  今回はフィーダ接続用端子としてRCAジャックを使用していますが，各自の使用環境に合わせて他の端子やコネクタに変更してください．
+                </p>
+                <p>
+                  ACアダプタには保護回路を内蔵している製品と，内蔵していない製品があります．
+                  保護回路を内臓していないACアダプタなどを電源として利用する場合は，<em>ポリスイッチを省略しないでください</em>．
+                  電源はフィーダ接続用端子からの最大出力電圧が12V以下になるように調整してください．
+                  NゲージにDC12V以上の電圧を印加すると故障の原因になります．
+                </p>
+
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric">番号</th>
+                        <th class="mdl-data-table__cell--non-numeric">部品名</th>
+                        <th class="mdl-data-table__cell--non-numeric">型番</th>
+                        <th>数量</th>
+                        <th class="mdl-data-table__cell--non-numeric">参考価格</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Tr1</td>
+                        <td class="mdl-data-table__cell--non-numeric">トランジスタ</td>
+                        <td class="mdl-data-table__cell--non-numeric">東芝 2SD1415A</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gI-06369/" target="_blank">60円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">VR1</td>
+                        <td class="mdl-data-table__cell--non-numeric">可変抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 10k&Omega; B</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00246/" target="_blank">50円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R1</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 2k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">R2</td>
+                        <td class="mdl-data-table__cell--non-numeric">炭素皮膜抵抗</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1/4W 1k&Omega;</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/e/erd25s" target="_blank">1円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">C1</td>
+                        <td class="mdl-data-table__cell--non-numeric">積層セラミック<br />コンデンサ</td>
+                        <td class="mdl-data-table__cell--non-numeric">村田製作所 50V 0.1&micro;F</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00090/" target="_blank">10円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">LED1</td>
+                        <td class="mdl-data-table__cell--non-numeric">LED</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 &phi;3 緑色</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">10円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">SW1</td>
+                        <td class="mdl-data-table__cell--non-numeric">トグルスイッチ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 1回路1接点</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">100円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">SW2</td>
+                        <td class="mdl-data-table__cell--non-numeric">トグルスイッチ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 2回路2接点</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00224/" target="_blank">90円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">PTC1</td>
+                        <td class="mdl-data-table__cell--non-numeric">ポリスイッチ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 ポリスイッチ 500mA<br />（1Aを超過すると遮断される）</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-01355/" target="_blank">30円</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CN1</td>
+                        <td class="mdl-data-table__cell--non-numeric">DCジャック</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 DCジャック &phi;2.1 ケース取付用</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gC-06342/" target="_blank">60円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">CN2</td>
+                        <td class="mdl-data-table__cell--non-numeric">RCAジャック</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 RCAジャック 黒</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gC-00154/" target="_blank">40円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">ケース</td>
+                        <td class="mdl-data-table__cell--non-numeric">テイシン電機 TB-2</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric">230円</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">ツマミ</td>
+                        <td class="mdl-data-table__cell--non-numeric">各社 汎用</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gP-00253/" target="_blank">20円<br />（互換品）</a></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">基板，リード線，タッピングビス</td>
+                        <td>適量</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">その他</td>
+                        <td class="mdl-data-table__cell--non-numeric">ACアダプタ DC12V センタープラス</td>
+                        <td>1</td>
+                        <td class="mdl-data-table__cell--non-numeric"><a href="http://akizukidenshi.com/catalog/g/gM-02194/" target="_blank">900円</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <h4>完成</h4>
+                <p>
+                  鉄道コレクションやBトレインショーティーとも相性が良く，発車時および停止時のスロー運転もスムースに走行します．
+                  パワーパックとして十分な実用性があります．
+                </p>
+
+                <a href="img/mokei_tr-ctrl/tr-ctrl_img02.jpg" data-lightbox="mokei_tr_ctrl" data-title="製作したパワーパック">
+                  <img src="img/mokei_tr-ctrl/tr-ctrl_img02.jpg" alt="製作したパワーパック" />
+                </a>
+
+                <h4>更新履歴</h4>
+                <div class="table-wrap">
+                  <table class="mdl-data-table mdl-js-data-table">
+                    <thead>
+                      <tr>
+                        <th class="mdl-data-table__cell--non-numeric"">日付</th>
+                        <th class="mdl-data-table__cell--non-numeric">内容</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2014/02/21</td>
+                        <td class="mdl-data-table__cell--non-numeric">回路図の一部部品に番号を追記．使用部品表に参考単価を追記</td>
+                      </tr>
+                      <tr>
+                        <td class="mdl-data-table__cell--non-numeric">2007/04/01</td>
+                        <td class="mdl-data-table__cell--non-numeric">公開開始</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+            <div class="mdl-grid">
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ez&f=ifr&linkID=a7ec7ffcf94f21c2beaf0e9d83c8042d&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+              <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell--amazon-banner">
+                  <iframe class="amazon-banner-2" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=12&l=ur1&category=consumables&banner=01FFPGM6WNKYF9VQMHR2&f=ifr&linkID=8787af772f93befc97ae2df9f989341c&t=keitetsu-22&tracking_id=keitetsu-22" width="300" height="250" style="border:none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--2-col-tablet mdl-cell--hide-phone">
+            <div class="mdl-cell--amazon-banner">
+              <iframe class="amazon-banner-1" src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=94c5721e7acc89e5886e59b6c10e7739&t=keitetsu-22&tracking_id=keitetsu-22" width="120" height="600" style="border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+        <footer class="mdl-mini-footer">
+          <div class="mdl-mini-footer__left-section">
+            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+          </div>
+          <div class="mdl-mini-footer__right-section">
+            <ul class="mdl-mini-footer__link-list">
+              <li><a href="index.html#help">Help</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+  </body>
+</html>
