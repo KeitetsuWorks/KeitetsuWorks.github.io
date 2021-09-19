@@ -30,6 +30,17 @@
     <link rel="stylesheet" href="css/styles.css">
 
     <script src="js/common.js"></script>
+    <script>
+      document.addEventListener('mdl-componentupgraded', function(){
+        if (!document.getElementById('adsbygooglejs')) {
+          var head = document.getElementsByTagName('head')[0];
+          var script = document.createElement('script');
+          script.id = 'adsbygooglejs';
+          script.src = "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+          head.appendChild(script);
+        }
+      });
+    </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PSLDBJZ3HB"></script>
@@ -40,7 +51,6 @@
 
       gtag('config', 'G-PSLDBJZ3HB');
     </script>
-    <script data-ad-client="ca-pub-8284710410017563" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   </head>
   <body class="mdl-keitetsu mdl-color--grey-100 mdl-color-text--grey-700">
     <div class="mdl-layout mdl-js-layout">
