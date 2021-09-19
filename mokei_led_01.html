@@ -219,7 +219,8 @@
         </div>
         <footer class="mdl-mini-footer">
           <div class="mdl-mini-footer__left-section">
-            <div class="mdl-logo">&copy; 2004-<script>showNowYear();</script> Keitetsu</div>
+            <div class="mdl-logo">&copy; 2004-<span id="year"></span> Keitetsu</div>
+            <script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
           </div>
           <div class="mdl-mini-footer__right-section">
             <ul class="mdl-mini-footer__link-list">

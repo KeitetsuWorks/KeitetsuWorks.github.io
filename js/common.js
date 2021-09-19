@@ -1,9 +1,3 @@
-function showNowYear(){
-    var now = new Date();
-    var year = now.getFullYear();
-    document.write(year);
-}
-
 document.addEventListener('mdl-componentupgraded', function(){
     if (!document.getElementById('adsbygooglejs')) {
         var head = document.getElementsByTagName('head')[0];
