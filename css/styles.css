@@ -72,9 +72,19 @@ h1, h2, h3, h4, h5, h6 {
   margin: 16px auto;
 }
 
-.mdl-keitetsu section.article .amazon-ads {
-  display: block;
-  margin: 16px auto;
+.mdl-keitetsu section.article ul.store {
+  position: relative;
+}
+
+.mdl-keitetsu section.article ul.store li {
+  list-style-type: none;
+}
+
+.mdl-keitetsu section.article ul.store li:before {
+  font-family: 'Material Icons';
+  content: 'store';
+  position: absolute;
+  left: 1em;
 }
 
 .mdl-keitetsu section.article .youtube-video-player {
