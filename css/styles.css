@@ -12,10 +12,11 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1080px;
 }
 
-.mdl-keitetsu .mdl-card__media img.article-image {
+.mdl-keitetsu .mdl-card__media img {
   width: 100%;
-  height: auto;
-  border: 0;
+  height: 200px;
+  display: block;
+  object-fit: cover;
 }
 
 .mdl-keitetsu .mdl-card__subtitle-text {
@@ -24,6 +25,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .mdl-keitetsu .mdl-card__supporting-text {
   width: initial;
+}
+
+.mdl-keitetsu .mdl-card__supporting-text ul.tag {
+  position: relative;
+}
+
+.mdl-keitetsu .mdl-card__supporting-text ul.tag li {
+  list-style-type: none;
+}
+
+.mdl-keitetsu .mdl-card__supporting-text ul.tag li:before {
+  font-family: 'Material Icons';
+  content: 'label';
+  position: absolute;
+  left: 1em;
+}
+
+.mdl-keitetsu .mdl-card__actions {
+  margin-top:auto;
 }
 
 .mdl-keitetsu .mdl-card__banner {
